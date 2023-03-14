@@ -28,7 +28,7 @@ class ListVisualizer:
                                 (x, y, pillar_size, height)
                         )
 
-                algo_dict = {cur_algo: "Bubble sort"}
+                algo_dict = {algo.bubble_sort: "Bubble sort"}
                 cur_algo_str = algo_dict[cur_algo]
 
                 font_surface_algo = font.render(f"Current algorithm: {cur_algo_str}", False, (255, 0, 0))
