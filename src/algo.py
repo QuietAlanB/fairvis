@@ -1,3 +1,5 @@
+import math
+
 # `ro_*` indicates that external modules may only read the variable.
 # `wo_*` indicates, conversely, a write-only value for external use.
 ro_display_ready = False
@@ -171,5 +173,32 @@ def selection_sort(lst):
                         
                 _algo_swap(lst, i, smallest)
                 _algo_render()
+        ro_algo_done = True
+        _algo_verify(lst)
+
+def comb_sort(lst):
+        global wo_terminate
+        global ro_algo_done
+
+        _algo_init()
+
+        gap = len(lst)
+        shrink = 1.2
+        sorted = False
+        while not sorted:
+                gap = math.floor(gap / shrink)
+                if gap <= 1:
+                        gap = 1
+                        sorted = True
+                for i in range(len(lst) - gap):
+                        if wo_terminate:
+                                wo_terminate = False
+                                return
+                        
+                        sm = gap + i
+                        if _algo_greater(lst, i, sm):
+                                _algo_swap(lst, i, sm)
+                                
+                        _algo_render()
         ro_algo_done = True
         _algo_verify(lst)

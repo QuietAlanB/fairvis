@@ -24,7 +24,7 @@ class ListVisualizer:
                         # by default, draw color of element depending on size.
                         # but if the element was just swapped or compared, use
                         # a different, pre-programmed color.
-                        col = (elem / largest * 255,) * 3
+                        col = (elem / largest * (255 - 90) + 90,) * 3
                         if not algo.ro_algo_done:
                                 for cmp in algo.ro_display_cmp_queue:
                                         if i == cmp[0] or i == cmp[1]:
@@ -47,6 +47,7 @@ class ListVisualizer:
                         algo.insertion_sort: "Insertion sort",
                         algo.gnome_sort: "Gnome sort",
                         algo.selection_sort: "Selection sort",
+                        algo.comb_sort: "Comb sort",
                 }
 
                 font_surface_algo = font.render(f"Current algorithm: {algo_dict[cur_algo]}", False, (255, 0, 0))
