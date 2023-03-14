@@ -4,6 +4,7 @@ ro_display_ready = False
 wo_display_done = False
 ro_comparisons = 0
 ro_swaps = 0
+ro_algo_done = False
 
 # since the algorithms are meant to run in a seperate thread, it is necessary to
 # create a mechanism for requesting their termination.
@@ -18,21 +19,36 @@ wo_terminate = False
 ro_display_swap_queue = []
 ro_display_cmp_queue = []
 
+# max index currently verified as correct.
+ro_verify_max_correct = 0
+
 def _algo_init():
         global ro_display_ready
         global wo_display_done
         global ro_comparisons
         global ro_swaps
+        global ro_algo_done
         global ro_display_swap_queue
         global ro_display_cmp_queue
+        global ro_verify_max_correct
         
         ro_display_ready = False
         wo_display_done = False
         ro_comparisons = 0
         ro_swaps = 0
+        ro_algo_done = False
         ro_display_swap_queue.clear()
         ro_display_cmp_queue.clear()
 
+def _algo_verify(lst):
+        global ro_verify_max_correct
+
+        for i in range(1, len(lst)):
+                if lst[i - 1] > lst[i]:
+                        return
+                ro_verify_max_correct += 1
+                _algo_render()
+        
 def _algo_compare(lst, ind_a, ind_b):
         global ro_comparisons
         global ro_display_cmp_queue
@@ -77,6 +93,7 @@ def _algo_swap(lst, ind_a, ind_b):
 
 def bubble_sort(lst):
         global wo_terminate
+        global ro_algo_done
         
         _algo_init()
         
@@ -90,9 +107,12 @@ def bubble_sort(lst):
                                 _algo_swap(lst, i - 1, i)
                                 
                         _algo_render()
+        ro_algo_done = True
+        _algo_verify(lst)
 
 def insertion_sort(lst):
         global wo_terminate
+        global ro_algo_done
 
         _algo_init()
 
@@ -106,9 +126,12 @@ def insertion_sort(lst):
                                 _algo_swap(lst, j - 1, j)
                                 
                         _algo_render()
+        ro_algo_done = True
+        _algo_verify(lst)
 
 def gnome_sort(lst):
         global wo_terminate
+        global ro_algo_done
 
         _algo_init()
 
@@ -125,9 +148,12 @@ def gnome_sort(lst):
                         pos -= 1
 
                 _algo_render()
+        ro_algo_done = True
+        _algo_verify(lst)
 
 def selection_sort(lst):
         global wo_terminate
+        global ro_algo_done
 
         _algo_init()
 
@@ -145,3 +171,5 @@ def selection_sort(lst):
                         
                 _algo_swap(lst, i, smallest)
                 _algo_render()
+        ro_algo_done = True
+        _algo_verify(lst)
