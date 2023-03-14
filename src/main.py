@@ -1,28 +1,35 @@
 import pygame
+import random
+import algo
+from threading import Thread
 from listvisualizer import ListVisualizer
-from algo import *
-screen_size = (1920, 1080)
+
+pygame.init()
+
+screen_size = (900, 600)
 screen = pygame.display.set_mode(screen_size)
-clock = pygame.time.Clock()
 running = True
 
 lst = []
-
-for i in range(900):
-        lst.append(i)
-
-lst.reverse()
+for i in range(60):
+        lst.append(random.randint(1, screen_size[1]))
 
 list_vis = ListVisualizer(lst)
+algo_thread = Thread(target = algo.bubble_sort, args = [lst])
+
+algo_thread.start()
 
 while running:
         for event in pygame.event.get():
-                if (event.type == pygame.QUIT):
+                if event.type == pygame.QUIT:
                         running = False
-
-        screen.fill((0, 0, 0))
-
-        list_vis.draw_update(screen, screen_size)
+                        algo.wo_terminate = True
+                        
+        if algo.ro_display_ready:
+                screen.fill((0, 0, 0))
+                list_vis.draw_update(screen, screen_size)
+                algo.wo_display_done = True
 
         pygame.display.update()
-        clock.tick(60)
+
+algo_thread.join()
