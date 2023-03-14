@@ -1,20 +1,22 @@
 import pygame
+import math
 
 class ListVisualizer:
         def __init__(self, list):
                 self.list = list
 
+        # this assumes that no `self.list` element is >`screen_size[1]`.
         def draw_update(self, screen, screen_size):
-                max_size = screen_size[0]
-                size = len(self.list)
-                step = int(max_size / size)
-                ratio = (screen_size[1]/screen_size[0])
+                pillar_size = math.ceil(screen_size[0] / len(self.list))
+                largest = max(self.list)
 
-                for i in range(0, size):
-                        value = self.list[i] + 1
-                        scaled_value = value * ratio * step
+                for i, elem in enumerate(self.list):
+                        height = elem / largest * screen_size[1]
 
+                        x = pillar_size * i
+                        y = screen_size[1] - height
                         pygame.draw.rect(
-                                screen, (255, 255, 255),
-                                (i * step, screen_size[1] - scaled_value, step, scaled_value)
+                                screen,
+                                (255, 255, 255),
+                                (x, y, pillar_size, height)
                         )

@@ -11,7 +11,7 @@ screen = pygame.display.set_mode(screen_size)
 running = True
 
 lst = []
-for i in range(60):
+for i in range(120):
         lst.append(random.randint(1, screen_size[1]))
 
 list_vis = ListVisualizer(lst)
