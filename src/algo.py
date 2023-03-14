@@ -21,9 +21,6 @@ wo_terminate = False
 ro_display_swap_queue = []
 ro_display_cmp_queue = []
 
-# max index currently verified as correct.
-ro_verify_max_correct = 0
-
 def _algo_init():
         global ro_display_ready
         global wo_display_done
@@ -41,6 +38,7 @@ def _algo_init():
         ro_algo_done = False
         ro_display_swap_queue.clear()
         ro_display_cmp_queue.clear()
+        ro_verify_max_correct = 0
 
 def _algo_verify(lst):
         global ro_verify_max_correct
