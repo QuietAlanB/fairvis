@@ -2,7 +2,6 @@
 # `wo_*` indicates, conversely, a write-only value for external use.
 ro_display_ready = False
 wo_display_done = False
-ro_iterations = 0
 ro_comparisons = 0
 ro_swaps = 0
 
@@ -22,7 +21,6 @@ ro_display_cmp_queue = []
 def _algo_init():
         global ro_display_ready
         global wo_display_done
-        global ro_iterations
         global ro_comparisons
         global ro_swaps
         global ro_display_swap_queue
@@ -30,11 +28,10 @@ def _algo_init():
         
         ro_display_ready = False
         wo_display_done = False
-        ro_iterations = 0
         ro_comparisons = 0
         ro_swaps = 0
-        ro_display_swap_queue = []
-        ro_display_cmp_queue = []
+        ro_display_swap_queue.clear()
+        ro_display_cmp_queue.clear()
 
 def _algo_compare(lst, ind_a, ind_b):
         global ro_comparisons
@@ -79,14 +76,12 @@ def _algo_swap(lst, ind_a, ind_b):
         ro_display_swap_queue.append((ind_a, ind_b))
 
 def bubble_sort(lst):
-        global ro_iterations
         global wo_terminate
         
         _algo_init()
         
         for _ in lst:
                 for i in range(1, len(lst)):
-                        ro_iterations += 1
                         if wo_terminate:
                                 wo_terminate = False
                                 return
@@ -97,14 +92,12 @@ def bubble_sort(lst):
                         _algo_render()
 
 def insertion_sort(lst):
-        global ro_iterations
         global wo_terminate
 
         _algo_init()
 
         for i, _ in enumerate(lst):
                 for j in range(i, 0, -1):
-                        ro_iterations += 1
                         if wo_terminate:
                                 wo_terminate = False
                                 return
@@ -115,14 +108,12 @@ def insertion_sort(lst):
                         _algo_render()
 
 def gnome_sort(lst):
-        global ro_iterations
         global wo_terminate
 
         _algo_init()
 
         pos = 0
         while pos < len(lst):
-                ro_iterations += 1
                 if wo_terminate:
                         wo_terminate = False
                         return
@@ -133,4 +124,24 @@ def gnome_sort(lst):
                         _algo_swap(lst, pos, pos - 1)
                         pos -= 1
 
+                _algo_render()
+
+def selection_sort(lst):
+        global wo_terminate
+
+        _algo_init()
+
+        for i in range(len(lst) - 1):
+                smallest = i
+                for j in range(i + 1, len(lst)):
+                        if wo_terminate:
+                                wo_terminate = False
+                                return
+
+                        if _algo_greater(lst, smallest, j):
+                                smallest = j
+                        
+                        _algo_render()
+                        
+                _algo_swap(lst, i, smallest)
                 _algo_render()

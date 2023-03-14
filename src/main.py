@@ -21,7 +21,7 @@ random.shuffle(lst)
 list_vis = ListVisualizer(lst)
 
 next_algo = None
-cur_algo = algo.gnome_sort
+cur_algo = algo.selection_sort
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
 

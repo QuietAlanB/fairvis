@@ -3,8 +3,8 @@ import math
 import algo
 
 pygame.font.init()
-font_size = 30
-font = pygame.font.Font("res/Lexend-Bold.ttf", font_size)
+font_size = 24
+font = pygame.font.Font("res/Lexend-Light.ttf", font_size)
 
 class ListVisualizer:
         def __init__(self, list):
@@ -43,14 +43,13 @@ class ListVisualizer:
                 algo_dict = {
                         algo.bubble_sort: "Bubble sort",
                         algo.insertion_sort: "Insertion sort",
-                        algo.gnome_sort: "Gnome sort"
+                        algo.gnome_sort: "Gnome sort",
+                        algo.selection_sort: "Selection sort",
                 }
 
                 font_surface_algo = font.render(f"Current algorithm: {algo_dict[cur_algo]}", False, (255, 0, 0))
-                font_surface_iter = font.render(f"Iterations: {algo.ro_iterations}", False, (255, 0, 0))
                 font_surface_cmp = font.render(f"Comparisons: {algo.ro_comparisons}", False, (255, 0, 0))
                 font_surface_swap = font.render(f"Swaps: {algo.ro_swaps}", False, (255, 0, 0))
                 screen.blit(font_surface_algo, (0, 0))
-                screen.blit(font_surface_iter, (0, font_size))
-                screen.blit(font_surface_cmp, (0, font_size * 2))
-                screen.blit(font_surface_swap, (0, font_size * 3))
+                screen.blit(font_surface_cmp, (0, font_size))
+                screen.blit(font_surface_swap, (0, font_size * 2))
