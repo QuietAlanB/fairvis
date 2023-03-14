@@ -15,8 +15,10 @@ class ListVisualizer:
 
                         x = pillar_size * i
                         y = screen_size[1] - height
+                        col = min((elem / largest) * 255 + 60, 255)
+
                         pygame.draw.rect(
                                 screen,
-                                (255, 255, 255),
+                                (col, col, col),
                                 (x, y, pillar_size, height)
                         )

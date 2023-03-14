@@ -54,7 +54,7 @@ def bubble_sort(lst):
         _algo_init()
         
         for _ in lst:
-                for i in range(len(lst) - 1):
+                for i in range(1, len(lst)):
                         if wo_terminate:
                                 wo_terminate = False
                                 return
