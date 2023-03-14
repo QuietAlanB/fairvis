@@ -16,9 +16,9 @@ def _algo_init():
         global ro_display_ready
         global wo_display_done
         global ro_iterations
-        global ro_checks
+        global ro_comparisons
         global ro_swaps
-    
+        
         ro_display_ready = False
         wo_display_done = False
         ro_iterations = 0
@@ -55,16 +55,20 @@ def bubble_sort(lst):
         
         for _ in lst:
                 for i in range(1, len(lst)):
+                        ro_iterations += 1
+
                         if wo_terminate:
                                 wo_terminate = False
                                 return
                         
                         if _algo_greater(lst[i - 1], lst[i]):
                                 _algo_swap(lst, i - 1, i)
-                
-                                ro_iterations += 1
+
                                 ro_display_ready = True
                                 while not wo_display_done:
                                         continue
                                 ro_display_ready = False
                                 wo_display_done = False
+
+def bogo_sort(lst):
+        pass
