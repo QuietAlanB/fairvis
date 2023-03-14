@@ -13,14 +13,14 @@ pygame.display.set_icon(pygame.image.load("res/fairvislogo.png"))
 running = True
 
 lst = []
-for i in range(60):
+for i in range(90):
         lst.append(i)
 
 random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-cur_algo = algo.insertion_sort
+cur_algo = algo.gnome_sort
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
 

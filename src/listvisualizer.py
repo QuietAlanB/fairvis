@@ -20,17 +20,30 @@ class ListVisualizer:
 
                         x = pillar_size * i
                         y = screen_size[1] - height
-                        col = elem / largest * 255
+
+                        # by default, draw color of element depending on size.
+                        # but if the element was just swapped or compared, use
+                        # a different, pre-programmed color.
+                        col = (elem / largest * 255,) * 3
+                        
+                        for cmp in algo.ro_display_cmp_queue:
+                                if i == cmp[0] or i == cmp[1]:
+                                        col = (100, 100, 255)
+                                        
+                        for swap in algo.ro_display_swap_queue:
+                                if i == swap[0] or i == swap[1]:
+                                        col = (255, 0, 0)
 
                         pygame.draw.rect(
                                 screen,
-                                (col, col, col),
+                                col,
                                 (x, y, pillar_size, height)
                         )
 
                 algo_dict = {
                         algo.bubble_sort: "Bubble sort",
                         algo.insertion_sort: "Insertion sort",
+                        algo.gnome_sort: "Gnome sort"
                 }
 
                 font_surface_algo = font.render(f"Current algorithm: {algo_dict[cur_algo]}", False, (255, 0, 0))
