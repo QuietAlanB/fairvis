@@ -20,8 +20,8 @@ random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-next_algo = None
 cur_algo = algo.selection_sort
+next_algo = cur_algo
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
 
@@ -41,6 +41,8 @@ while running:
                         next_algo = algo.insertion_sort
                 if key_down and event.key == pygame.K_3:
                         next_algo = algo.gnome_sort
+                if key_down and event.key == pygame.K_4:
+                        next_algo = algo.selection_sort
 
                 # closes the thread
                 if key_down and event.key == pygame.K_SPACE:
