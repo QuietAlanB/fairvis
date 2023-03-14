@@ -28,10 +28,12 @@ class ListVisualizer:
                                 (x, y, pillar_size, height)
                         )
 
-                algo_dict = {algo.bubble_sort: "Bubble sort"}
-                cur_algo_str = algo_dict[cur_algo]
+                algo_dict = {
+                        algo.bubble_sort: "Bubble sort",
+                        algo.insertion_sort: "Insertion sort",
+                }
 
-                font_surface_algo = font.render(f"Current algorithm: {cur_algo_str}", False, (255, 0, 0))
+                font_surface_algo = font.render(f"Current algorithm: {algo_dict[cur_algo]}", False, (255, 0, 0))
                 font_surface_iter = font.render(f"Iterations: {algo.ro_iterations}", False, (255, 0, 0))
                 font_surface_cmp = font.render(f"Comparisons: {algo.ro_comparisons}", False, (255, 0, 0))
                 font_surface_swap = font.render(f"Swaps: {algo.ro_swaps}", False, (255, 0, 0))
