@@ -13,14 +13,14 @@ pygame.display.set_icon(pygame.image.load("res/fairvislogo.png"))
 running = True
 
 lst = []
-for i in range(90):
+for i in range(300):
         lst.append(i)
 
 random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-cur_algo = algo.selection_sort
+cur_algo = algo.comb_sort
 next_algo = cur_algo
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
@@ -43,6 +43,8 @@ while running:
                         next_algo = algo.gnome_sort
                 if key_down and event.key == pygame.K_4:
                         next_algo = algo.selection_sort
+                if key_down and event.key == pygame.K_5:
+                        next_algo = algo.comb_sort
 
                 # closes the thread
                 if key_down and event.key == pygame.K_SPACE:
