@@ -8,7 +8,7 @@ class ListVisualizer:
                 max_size = screen_size[0]
                 size = len(self.list)
                 step = int(max_size / size)
-                ratio = (9/16)
+                ratio = (screen_size[1]/screen_size[0])
 
                 for i in range(0, size):
                         value = self.list[i] + 1

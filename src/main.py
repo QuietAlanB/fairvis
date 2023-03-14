@@ -1,6 +1,6 @@
 import pygame
 from listvisualizer import ListVisualizer
-
+from algo import *
 screen_size = (1920, 1080)
 screen = pygame.display.set_mode(screen_size)
 clock = pygame.time.Clock()
