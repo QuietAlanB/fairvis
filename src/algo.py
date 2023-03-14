@@ -1,5 +1,3 @@
-import random
-
 # `ro_*` indicates that external modules may only read the variable.
 # `wo_*` indicates, conversely, a write-only value for external use.
 ro_display_ready = False
@@ -13,7 +11,6 @@ ro_swaps = 0
 # in order to terminate the running algorithm thread, set this to `True`.
 wo_terminate = False
 
-# for internal use only.
 def _algo_init():
         global ro_display_ready
         global wo_display_done
@@ -27,18 +24,25 @@ def _algo_init():
         ro_comparisons = 0
         ro_swaps = 0
 
-# for internal use only.
 def _algo_compare(a, b):
         global ro_comparisons
 
         ro_comparisons += 1
         return max(a, b)
 
-# for internal use only.
 def _algo_greater(a, b):
         return _algo_compare(a, b) == a
 
-# for internal use only.
+def _algo_render():
+        global ro_display_ready
+        global wo_display_done
+        
+        ro_display_ready = True
+        while not wo_display_done:
+                continue
+        ro_display_ready = False
+        wo_display_done = False
+
 def _algo_swap(lst, ind_a, ind_b):
         global ro_swaps
 
@@ -48,8 +52,6 @@ def _algo_swap(lst, ind_a, ind_b):
         ro_swaps += 1
 
 def bubble_sort(lst):
-        global ro_display_ready
-        global wo_display_done
         global ro_iterations
         global wo_terminate
         
@@ -65,9 +67,24 @@ def bubble_sort(lst):
                         
                         if _algo_greater(lst[i - 1], lst[i]):
                                 _algo_swap(lst, i - 1, i)
+                                
+                        _algo_render()
 
-                                ro_display_ready = True
-                                while not wo_display_done:
-                                        continue
-                                ro_display_ready = False
-                                wo_display_done = False
+def insertion_sort(lst):
+        global ro_iterations
+        global wo_terminate
+
+        _algo_init()
+
+        for i, _ in enumerate(lst):
+                for j in range(i, 0, -1):
+                        ro_iterations += 1
+
+                        if wo_terminate:
+                                wo_terminate = False
+                                return
+
+                        if _algo_greater(lst[j - 1], lst[j]):
+                                _algo_swap(lst, j - 1, j)
+
+                        _algo_render()

@@ -6,7 +6,7 @@ from listvisualizer import ListVisualizer
 
 pygame.init()
 
-screen_size = (1920, 1080)
+screen_size = (900, 600)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("sorting algorithm visualizer")
 pygame.display.set_icon(pygame.image.load("res/fairvislogo.png"))
@@ -20,7 +20,7 @@ random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-cur_algo = algo.bubble_sort
+cur_algo = algo.insertion_sort
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
 
