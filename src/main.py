@@ -20,6 +20,8 @@ while running:
                 if (event.type == pygame.QUIT):
                         running = False
 
+        screen.fill((0, 0, 0))
+
         list_vis.draw_update(screen, screen_size)
 
         pygame.display.update()
