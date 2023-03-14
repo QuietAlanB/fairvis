@@ -3,8 +3,6 @@ import random
 import algo
 from threading import Thread
 from listvisualizer import ListVisualizer
-import numpy as np
-
 
 pygame.init()
 
@@ -31,10 +29,25 @@ while running:
                 if event.type == pygame.QUIT:
                         running = False
                         algo.wo_terminate = True
+
+                key_down = event.type == pygame.KEYDOWN
+                key_up = event.type == pygame.KEYUP
+
+                # closes the thread
+                if key_down and event.key == pygame.K_SPACE:
+                        if (algo_thread.is_alive()):
+                                algo.wo_terminate = True
+
+                # starts a new thread
+                if key_up and event.key == pygame.K_SPACE:
+                        random.shuffle(lst)
+
+                        algo_thread = Thread(target = cur_algo, args = [lst])
+                        algo_thread.start()
                         
         if algo.ro_display_ready:
                 screen.fill((0, 0, 0))
-                list_vis.draw_update(screen, screen_size)
+                list_vis.draw_update(screen, screen_size, cur_algo)
                 algo.wo_display_done = True
 
         pygame.display.update()

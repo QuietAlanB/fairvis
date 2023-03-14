@@ -1,3 +1,5 @@
+import random
+
 # `ro_*` indicates that external modules may only read the variable.
 # `wo_*` indicates, conversely, a write-only value for external use.
 ro_display_ready = False
@@ -69,6 +71,3 @@ def bubble_sort(lst):
                                         continue
                                 ro_display_ready = False
                                 wo_display_done = False
-
-def bogo_sort(lst):
-        pass
