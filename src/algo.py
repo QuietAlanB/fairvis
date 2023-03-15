@@ -112,14 +112,14 @@ def bubble_sort(lst):
         
         _algo_init()
         
-        for _ in lst:
-                for i in range(1, len(lst)):
+        for i, _ in enumerate(lst):
+                for j in range(1, len(lst) - i):
                         if wo_terminate:
                                 wo_terminate = False
                                 return
                         
-                        if _algo_greater(lst, i - 1, i):
-                                _algo_swap(lst, i - 1, i)
+                        if _algo_greater(lst, j - 1, j):
+                                _algo_swap(lst, j - 1, j)
                                 
                         _algo_render()
         ro_algo_done = True
