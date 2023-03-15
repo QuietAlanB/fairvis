@@ -43,14 +43,26 @@ def _algo_init():
         ro_verify_max_correct = 0
 
 def _algo_play_sound(lst, ind):
-        buffer = numpy.cos(2 * numpy.pi * numpy.arange(0, 4410, 0.1) * (600 + lst[ind] / max(lst) * 700) / 4410).astype(numpy.float32)
-        sound = pygame.mixer.Sound(buffer)
-        sound.play(0, 10)
+        sin_array = numpy.array(
+                2048 * numpy.sin(2.0 * numpy.pi * 300 * (lst[ind] / max(lst)) * numpy.arange(1800) / 1800)
+        ).astype(numpy.int16)
+
+        sound_array = numpy.c_[sin_array, sin_array]
+        sound = pygame.sndarray.make_sound(sound_array)
+
+        sound.play(0, 36) # dont change
+        sound.fadeout(36) # dont change
 
 def _algo_play_verify_sound(lst, ind):
-        buffer = 0.5 * numpy.cos(8 * numpy.pi * numpy.arange(0, 4410, 0.1) * (600 + lst[ind] / max(lst) * 700) / 4410).astype(numpy.float32)
-        sound = pygame.mixer.Sound(buffer)
-        sound.play(0, 10)
+        sin_array = numpy.array(
+                4096 * numpy.sin(2.0 * numpy.pi * 600 * (lst[ind] / max(lst)) * numpy.arange(3600) / 3600)
+        ).astype(numpy.int16)
+
+        sound_array = numpy.c_[sin_array, sin_array]
+        sound = pygame.sndarray.make_sound(sound_array)
+
+        sound.play(0, 100)
+        sound.fadeout(100)
 
 def _algo_verify(lst):
         global ro_verify_max_correct

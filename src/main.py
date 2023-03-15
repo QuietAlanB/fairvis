@@ -5,7 +5,7 @@ from threading import Thread
 from listvisualizer import ListVisualizer
 
 pygame.init()
-pygame.mixer.init(size = 32)
+pygame.mixer.init(44100, 16, 2, 512)
 
 screen_size = (1920, 1080)
 screen = pygame.display.set_mode(screen_size)
@@ -14,7 +14,7 @@ pygame.display.set_icon(pygame.image.load("res/fairvislogo.png"))
 running = True
 
 lst = []
-for i in range(96):
+for i in range(192):
         lst.append(i)
 
 random.shuffle(lst)
