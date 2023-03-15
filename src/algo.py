@@ -50,6 +50,8 @@ def _algo_play_sound(lst, ind):
         sound_array = numpy.c_[sin_array, sin_array]
         sound = pygame.sndarray.make_sound(sound_array)
 
+        sound.set_volume(0.8)
+
         sound.play(0, 36) # dont change
         sound.fadeout(36) # dont change
 
@@ -60,6 +62,8 @@ def _algo_play_verify_sound(lst, ind):
 
         sound_array = numpy.c_[sin_array, sin_array]
         sound = pygame.sndarray.make_sound(sound_array)
+
+        sound.set_volume(0.8)
 
         sound.play(0, 100)
         sound.fadeout(100)
