@@ -32,9 +32,8 @@ class ListVisualizer:
                                 for swap in algo.ro_display_swap_queue:
                                         if i == swap[0] or i == swap[1]:
                                                 col = (255, 0, 0)
-                        else:
-                                if i <= algo.ro_verify_max_correct:
-                                        col = (0, 255, 0)
+                        elif i <= algo.ro_verify_max_correct:
+                                col = (0, 255, 0)
 
                         pygame.draw.rect(
                                 screen,

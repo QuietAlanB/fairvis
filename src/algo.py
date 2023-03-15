@@ -1,4 +1,6 @@
 import math
+import numpy
+import pygame
 
 # `ro_*` indicates that external modules may only read the variable.
 # `wo_*` indicates, conversely, a write-only value for external use.
@@ -40,10 +42,21 @@ def _algo_init():
         ro_display_cmp_queue.clear()
         ro_verify_max_correct = 0
 
+def _algo_play_sound(lst, ind):
+        buffer = numpy.cos(2 * numpy.pi * numpy.arange(0, 4410, 0.1) * (600 + lst[ind] / max(lst) * 700) / 4410).astype(numpy.float32)
+        sound = pygame.mixer.Sound(buffer)
+        sound.play(0, 10)
+
+def _algo_play_verify_sound(lst, ind):
+        buffer = 0.5 * numpy.cos(8 * numpy.pi * numpy.arange(0, 4410, 0.1) * (600 + lst[ind] / max(lst) * 700) / 4410).astype(numpy.float32)
+        sound = pygame.mixer.Sound(buffer)
+        sound.play(0, 10)
+
 def _algo_verify(lst):
         global ro_verify_max_correct
 
         for i in range(1, len(lst)):
+                _algo_play_verify_sound(lst, i)
                 if lst[i - 1] > lst[i]:
                         return
                 ro_verify_max_correct += 1
@@ -55,6 +68,8 @@ def _algo_compare(lst, ind_a, ind_b):
 
         ro_comparisons += 1
         ro_display_cmp_queue.append((ind_a, ind_b))
+        _algo_play_sound(lst, ind_a)
+        _algo_play_sound(lst, ind_b)
         return max(lst[ind_a], lst[ind_b])
 
 def _algo_greater(lst, ind_lhs, ind_rhs):

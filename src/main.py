@@ -5,22 +5,23 @@ from threading import Thread
 from listvisualizer import ListVisualizer
 
 pygame.init()
+pygame.mixer.init(size = 32)
 
-screen_size = (900, 600)
+screen_size = (1920, 1080)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("sorting algorithm visualizer")
 pygame.display.set_icon(pygame.image.load("res/fairvislogo.png"))
 running = True
 
 lst = []
-for i in range(300):
+for i in range(96):
         lst.append(i)
 
 random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-cur_algo = algo.comb_sort
+cur_algo = algo.bubble_sort
 next_algo = cur_algo
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
