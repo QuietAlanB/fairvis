@@ -21,7 +21,7 @@ random.shuffle(lst)
 
 list_vis = ListVisualizer(lst)
 
-cur_algo = algo.bubble_sort
+cur_algo = algo.radix_sort_lsd
 next_algo = cur_algo
 algo_thread = Thread(target = cur_algo, args = [lst])
 algo_thread.start()
@@ -46,6 +46,8 @@ while running:
                         next_algo = algo.selection_sort
                 if key_down and event.key == pygame.K_5:
                         next_algo = algo.comb_sort
+                if key_down and event.key == pygame.K_6:
+                        next_algo = algo.radix_sort_lsd
 
                 # closes the thread
                 if key_down and event.key == pygame.K_SPACE:

@@ -32,6 +32,9 @@ class ListVisualizer:
                                 for swap in algo.ro_display_swap_queue:
                                         if i == swap[0] or i == swap[1]:
                                                 col = (255, 0, 0)
+                                for arr in algo.ro_display_arr_queue:
+                                        if i == arr:
+                                                col = (255, 0, 0)
                         elif i <= algo.ro_verify_max_correct:
                                 col = (0, 255, 0)
 
@@ -47,6 +50,7 @@ class ListVisualizer:
                         algo.gnome_sort: "Gnome sort",
                         algo.selection_sort: "Selection sort",
                         algo.comb_sort: "Comb sort",
+                        algo.radix_sort_lsd: "Radix sort (LSD)"
                 }
 
                 font_surface_algo = font.render(f"Current algorithm: {algo_dict[cur_algo]}", False, (255, 0, 0))
