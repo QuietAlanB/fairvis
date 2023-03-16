@@ -47,9 +47,13 @@ def _algo_init():
         ro_verify_max_correct = 0
 
 def _algo_play_sound(lst, ind):
-        sin_array = numpy.array(
-                2048 * numpy.sin(2.0 * numpy.pi * 300 * (lst[ind] / max(lst)) * numpy.arange(1800) / 1800)
-        ).astype(numpy.int16)
+        sin_array = None
+        try:
+                sin_array = numpy.array(
+                        2048 * numpy.sin(2.0 * numpy.pi * 300 * (lst[ind] / max(lst)) * numpy.arange(1800) / 1800)
+                ).astype(numpy.int16)
+        except ZeroDivisionError:
+                pass
 
         sound_array = numpy.c_[sin_array, sin_array]
         sound = pygame.sndarray.make_sound(sound_array)
