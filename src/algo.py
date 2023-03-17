@@ -50,28 +50,29 @@ def _algo_play_sound(lst, ind):
         sin_array = None
         try:
                 sin_array = numpy.array(
-                        2048 * numpy.sin(2.0 * numpy.pi * 300 * (lst[ind] / max(lst)) * numpy.arange(1800) / 1800)
+                        2048 * numpy.sin(2.0 * numpy.pi * 350 * (lst[ind] / max(lst)) * numpy.arange(1800) / 1800)
                 ).astype(numpy.int16)
+
+                sound_array = numpy.c_[sin_array, sin_array]
+                sound = pygame.sndarray.make_sound(sound_array)
+
+                #sound.set_volume(0.8)
+
+                sound.play(0, 36) # dont change
+                sound.fadeout(36) # dont change
+
         except ZeroDivisionError:
                 pass
 
-        sound_array = numpy.c_[sin_array, sin_array]
-        sound = pygame.sndarray.make_sound(sound_array)
-
-        sound.set_volume(0.8)
-
-        sound.play(0, 36) # dont change
-        sound.fadeout(36) # dont change
-
 def _algo_play_verify_sound(lst, ind):
         sin_array = numpy.array(
-                4096 * numpy.sin(2.0 * numpy.pi * 600 * (lst[ind] / max(lst)) * numpy.arange(3600) / 3600)
+                4096 * numpy.sin(2.0 * numpy.pi * 700 * (lst[ind] / max(lst)) * numpy.arange(3600) / 3600)
         ).astype(numpy.int16)
 
         sound_array = numpy.c_[sin_array, sin_array]
         sound = pygame.sndarray.make_sound(sound_array)
 
-        sound.set_volume(0.8)
+        #sound.set_volume(0.8)
 
         sound.play(0, 100)
         sound.fadeout(100)
@@ -118,6 +119,13 @@ def _algo_radix_digit(str, max_digits):
         diff = max_digits - len(str)
         new_str = ("0" * diff) + str
         return new_str
+
+def _algo_bubble_sort_radix_one(lst, iter):        
+        for j in range(1, len(lst) - iter):
+                if lst[j][2] < lst[j - 1][2]:
+                        temp = lst[j]
+                        lst[j] = lst[j - 1]
+                        lst[j - 1] = temp
 
 def _algo_render():
         global ro_display_ready
@@ -256,13 +264,6 @@ def comb_sort(lst):
         ro_algo_done = True
         _algo_verify(lst)
 
-def bubble_sort_radix_one(lst, iter):        
-        for j in range(1, len(lst) - iter):
-                if lst[j][2] < lst[j - 1][2]:
-                        temp = lst[j]
-                        lst[j] = lst[j - 1]
-                        lst[j - 1] = temp
-
 def radix_sort_lsd(lst):
         global wo_terminate
         global ro_algo_done
@@ -288,7 +289,7 @@ def radix_sort_lsd(lst):
                         _algo_render()
 
                 for i in range(len(lst)):
-                        bubble_sort_radix_one(next_buckets, i)
+                        _algo_bubble_sort_radix_one(next_buckets, i)
                         _algo_play_sound(next_buckets[i], 1)
 
                         lstcpy = copy.deepcopy(lst)
